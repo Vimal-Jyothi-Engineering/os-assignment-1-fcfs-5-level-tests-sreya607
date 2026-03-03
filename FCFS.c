@@ -11,10 +11,10 @@ int main() {
     for (int i = 0; i < n; i++) {
         char pname[20];
         scanf("%s %d %d", pname, &at[i], &bt[i]);
-        pid[i] = atoi(pname + 1);   // Extract number from P1, P2...
+        pid[i] = atoi(pname + 1);
     }
 
-    // Sort by arrival time (Bubble sort)
+    // Sort by arrival time
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
             if (at[j] > at[j + 1]) {
@@ -35,15 +35,11 @@ int main() {
         }
     }
 
-    // Proper FCFS Calculation
     int current_time = 0;
 
     for (int i = 0; i < n; i++) {
-
-        // If CPU is idle
-        if (current_time < at[i]) {
+        if (current_time < at[i])
             current_time = at[i];
-        }
 
         wt[i] = current_time - at[i];
         tat[i] = wt[i] + bt[i];
@@ -61,16 +57,16 @@ int main() {
     avgWT /= n;
     avgTAT /= n;
 
-    printf("\nWaiting Time:\n");
+    printf("Waiting Time:\n");
     for (int i = 0; i < n; i++)
         printf("P%d %d\n", pid[i], wt[i]);
 
-    printf("\nTurnaround Time:\n");
+    printf("Turnaround Time:\n");
     for (int i = 0; i < n; i++)
         printf("P%d %d\n", pid[i], tat[i]);
 
-    printf("\nAverage Waiting Time: %.2f\n", avgWT);
-    printf("Average Turnaround Time: %.2f\n", avgTAT);
+    printf("Average Waiting Time: %.2f\n", avgWT);
+    printf("Average Turnaround Time: %.2f", avgTAT);
 
     return 0;
 }
